@@ -31,8 +31,10 @@ namespace MeetUp.Domain
 
         public virtual ICollection<RSVP> RSVP { get; set; }
         public virtual ICollection<OcassionComment> Comments { get; set; }
-        public virtual ICollection<SentEmails> Emails { get; set; }
-        public virtual ICollection<UserPics> Pics { get; set; }
+        public virtual ICollection<Email> Emails { get; set; }
+        public virtual ICollection<UserPic> Pics { get; set; }
         public virtual ICollection<OccasionImage> EventImages { get; set; }
+	    
+		public bool IsDeleted { get; set; }
     }
 }

@@ -27,5 +27,6 @@ namespace MeetUp.Domain
 
         public ICollection<Occasion> Occasions { get; set; }
         public virtual ICollection<OccasionImage> OccasionImages { get; set; }
+	    public bool IsDeleted { get; set; }
     }
 }

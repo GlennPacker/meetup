@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetUp.Web", "MeetUp.Web\Me
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetUp.Domain", "MeetUp.Domain\MeetUp.Domain.csproj", "{DD06E675-69C1-403B-A56B-698D49F0F06D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{756CAAE0-D60E-442D-9C15-40D2A5EFF594}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{DD06E675-69C1-403B-A56B-698D49F0F06D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD06E675-69C1-403B-A56B-698D49F0F06D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD06E675-69C1-403B-A56B-698D49F0F06D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{756CAAE0-D60E-442D-9C15-40D2A5EFF594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{756CAAE0-D60E-442D-9C15-40D2A5EFF594}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{756CAAE0-D60E-442D-9C15-40D2A5EFF594}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{756CAAE0-D60E-442D-9C15-40D2A5EFF594}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MeetUp.Domain
 {
-    public class SentEmails
+    public class Email
     {
         [Key]
         public int FromUserId { get; set; }
@@ -17,5 +17,7 @@ namespace MeetUp.Domain
 
         [ForeignKey("FromUserId")]
         public virtual UserAccount FromUser { get; set; }
+
+	    public bool IsDeleted { get; set; }
     }
 }

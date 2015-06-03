@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MeetUp.Domain
 {
-    public class UserPics
+    public class UserPic
     {
         [Key]
         public int Id { get; set; }

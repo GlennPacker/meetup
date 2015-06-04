@@ -9,8 +9,7 @@ namespace MeetUp.Domain
         public int Id { get; set; }
         public int UserId { get; set; }
         public int OccasionId { get; set; }
-
-
+        
         [ForeignKey("UserId")]
         public virtual UserAccount Going { get; set; }
 

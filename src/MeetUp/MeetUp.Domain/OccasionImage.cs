@@ -11,17 +11,17 @@ namespace MeetUp.Domain
         public string Img { get; set; }
         public byte[] ImgStreamThb { get; set; }
         public string ImgThb { get; set; }
-        public int OccasionId { get; set; }
         public string MeetUpPath { get; set; }
-        public int UserId { get; set; }
-        public int VenueId { get; set; }
-
+        
+        public int OccasionId { get; set; }
         [ForeignKey("OccasionId")]
         public virtual Occasion Occasion { get; set; }
 
-        [ForeignKey("UserID")]
+        public int UserId { get; set; }
+        [ForeignKey("UserId")]
         public virtual UserAccount User { get; set; }
 
+        public int VenueId { get; set; }
         [ForeignKey("VenueId")]
         public virtual Venue Venue { get; set; }
     }

@@ -46,21 +46,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Email.cs" />
     <Compile Include="MeetUpContext.cs" />
+    <Compile Include="Migrations\201506041902192_1.cs" />
+    <Compile Include="Migrations\201506041902192_1.Designer.cs">
+      <DependentUpon>201506041902192_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OccasionImage.cs" />
     <Compile Include="OcassionComment.cs" />
     <Compile Include="Occasion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RSVP.cs" />
     <Compile Include="Runner.cs" />
-    <Compile Include="SentEmails.cs" />
     <Compile Include="UserAccount.cs" />
-    <Compile Include="UserPics.cs" />
+    <Compile Include="UserPic.cs" />
     <Compile Include="Venue.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201506041902192_1.resx">
+      <DependentUpon>201506041902192_1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

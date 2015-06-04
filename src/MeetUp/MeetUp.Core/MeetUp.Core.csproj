@@ -39,8 +39,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="IEmailRepository.cs" />
+    <Compile Include="IOcassionCommentRepository.cs" />
+    <Compile Include="IOccasionImageRepository.cs" />
+    <Compile Include="IOccasionRepository.cs" />
+    <Compile Include="IRSVPRepository.cs" />
+    <Compile Include="IRunnerRepository.cs" />
+    <Compile Include="IUserAccountRepository.cs" />
+    <Compile Include="IUserPicRepository.cs" />
+    <Compile Include="IVenueRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MeetUp.Domain\MeetUp.Domain.csproj">
+      <Project>{DD06E675-69C1-403B-A56B-698D49F0F06D}</Project>
+      <Name>MeetUp.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

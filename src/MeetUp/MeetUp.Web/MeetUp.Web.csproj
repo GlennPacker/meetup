@@ -265,6 +265,15 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Demo.config" />
+    <Content Include="ExampleWeb.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="ExampleWeb.Debug.config">
+      <DependentUpon>ExampleWeb.config</DependentUpon>
+    </None>
+    <None Include="ExampleWeb.Release.config">
+      <DependentUpon>ExampleWeb.config</DependentUpon>
+    </None>
     <None Include="Demo.Debug.config">
       <DependentUpon>Demo.config</DependentUpon>
     </None>

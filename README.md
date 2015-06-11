@@ -4,6 +4,8 @@
 This website uses the meetup api calls to create your own meetup website.
 
 -----------------------
+Using the project 
+
 Get Api keys for MeetUp and FaceBook 
 
 Copy the tests project's ExampleTestModelsHiddenBase.cs to TestModelsHiddenBase.cs and populate with your own security info.

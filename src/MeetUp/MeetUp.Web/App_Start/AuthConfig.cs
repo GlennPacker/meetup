@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
+using System.Web.Configuration;
 using Microsoft.Web.WebPages.OAuth;
 using MeetUp.Web.Models;
 
@@ -24,8 +25,8 @@ namespace MeetUp.Web
             //    consumerSecret: "");
 
             OAuthWebSecurity.RegisterFacebookClient(
-                appId: ConfigurationManager.AppSettings["FaceBookAppId"],
-                appSecret: ConfigurationManager.AppSettings["FaceBookAppSecret"]);
+                appId: WebConfigurationManager.AppSettings["FaceBookAppId"],
+                appSecret: WebConfigurationManager.AppSettings["FaceBookAppSecret"]);
 
             //OAuthWebSecurity.RegisterGoogleClient();
         }

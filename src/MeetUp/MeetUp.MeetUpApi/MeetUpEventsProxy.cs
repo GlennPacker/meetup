@@ -1,40 +1,24 @@
-﻿using System.Collections.Generic;
-using MeetUp.ApiProxy;
+﻿using MeetUp.ApiProxy;
 using MeetUp.ApiProxy.Models;
-using Newtonsoft.Json;
+using MeetUp.MeetUpApi.Interfaces;
+using MeetUp.MeetUpApi.Models;
 
 namespace MeetUp.MeetUpApi
 {
-    public class ExampleProxy
+    public class MeetUpEventsProxy: BaseProxy, IMeetUpEventsProxy
     {
-        private readonly string _baseUrl;
-        private readonly IApiServices _services;
-
-		public ExampleProxy()
-		{
-            // empty constructor making unit testing easier
-			_services = new ApiServices();
-			_baseUrl = "";      // api url 
-		}
-
-        public ExampleProxy(string baseUrl)
+        public MeetUpEventsProxy(IApiServices services, string key, string groupurl) : base(services, key, groupurl)
         {
-            _services = new ApiServices();
-            _baseUrl = baseUrl;      // api url url from di
         }
 
-        public ExampleProxy(string baseUrl, IApiServices services)
+        public Wrapper<MeetupEvents> GetMeetupEvents()
         {
-            _services = services;
-            _baseUrl = baseUrl;      // api url 
+            var url = BaseUrl + "2/events?&sign=true&photo-host=public&group_urlname=" + GroupUrl + 
+                "&fields = event_hosts & page = 20 & omit = fee, maybe_rsvp_count, visibility, utc_offset, announced, " +
+                "waitlist_count, yes_rsvp_count, how_to_find_us, event_url, created, group, headcount, status";     // add in the rest of the url
+            var result = Get<MeetupEvents>(url); 
+            return result;
         }
-
-        //public Wrapper<ApiFoo> GetApiObject(int id)     
-        //{
-        //    var url = _baseUrl + "controller/" + id;     // add in the rest of the url
-        //    var result = _services.Get<ApiFoo>(url);
-        //    return result;
-        //}
 
 
         //public Wrapper<ApiFoo> PostApiObject(ApiFoo item)
@@ -61,6 +45,7 @@ namespace MeetUp.MeetUpApi
         //    var url = _baseUrl + "controller/" + id;
         //    return _services.Delete(url);
         //}
+
 
 
     }

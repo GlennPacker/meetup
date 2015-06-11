@@ -195,3 +195,5 @@ FakesAssemblies/
 # Visual Studio 6 workspace options file
 *.opt
 src/MeetUp/MeetUp.Web/Web.config
+src/MeetUp/MeetUp.Tests/App.config
+src/MeetUp/MeetUp.Tests/TestModelsHiddenBase.cs

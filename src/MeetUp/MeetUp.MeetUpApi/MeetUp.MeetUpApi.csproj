@@ -42,9 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExampleProxy.cs" />
+    <Compile Include="BaseProxy.cs" />
+    <Compile Include="MeetUpEventsProxy.cs" />
+    <Compile Include="Interfaces\IMeetUpEventsProxy.cs" />
     <Compile Include="Models\event_hosts.cs" />
-    <Compile Include="Models\MeetupEventObject.cs" />
+    <Compile Include="Models\MeetupEvents.cs" />
     <Compile Include="Models\MeetupMember.cs" />
     <Compile Include="Models\MeetupMemberDownload.cs" />
     <Compile Include="Models\Member_Photo.cs" />
@@ -59,6 +61,10 @@
     <ProjectReference Include="..\MeetUp.ApiProxy\MeetUp.ApiProxy.csproj">
       <Project>{F4C93019-2AC3-4376-AA89-33360F66C46C}</Project>
       <Name>MeetUp.ApiProxy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MeetUp.Domain\MeetUp.Domain.csproj">
+      <Project>{DD06E675-69C1-403B-A56B-698D49F0F06D}</Project>
+      <Name>MeetUp.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

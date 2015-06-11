@@ -38,7 +38,7 @@ namespace MeetUp.Web
             // container.LoadConfiguration();
 
             container.RegisterType<IApiServices, ApiServices>();
-            container.RegisterType<IMeetUpEventsProxy, MeetUpEventsProxy>();
+            container.RegisterType<IMeetUpEventsProxy, MeetUpEventsProxy>(new InjectionConstructor(new ApiServices(), ConfigServices.MeetUpKey,ConfigServices.GroupUrl));
         }
     }
 }

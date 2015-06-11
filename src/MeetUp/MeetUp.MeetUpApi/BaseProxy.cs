@@ -13,7 +13,7 @@ namespace MeetUp.MeetUpApi
         public BaseProxy(IApiServices services, string key, string groupurl)
         {
             _services = services;
-            BaseUrl = "https://api.meetup.com/";      // api url if this was to change nothing would work from meetup and site defunct so hard coded
+            BaseUrl = "https://api.meetup.com/";      // api url if this was to change nothing would work from meetup and meetup site defunct so... hard coded
             _key = "&key=" + key;
             GroupUrl = groupurl;
         }

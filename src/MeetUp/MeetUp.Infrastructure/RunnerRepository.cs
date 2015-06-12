@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using log4net;
 using MeetUp.Core;
 using MeetUp.Domain;
 
@@ -8,6 +9,7 @@ namespace MeetUp.Infrastructure
 	public class RunnerRepository : IRunnerRepository
 	{
 		private readonly MeetUpContext _db;
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 		public RunnerRepository(MeetUpContext db)
 		{
@@ -55,7 +57,7 @@ namespace MeetUp.Infrastructure
 			}
 			catch(Exception ex)
 			{
-				// logger needs adding here
+				Log.Error("Database Error Entity Runner", ex);
 				return false;
 			}
 		}

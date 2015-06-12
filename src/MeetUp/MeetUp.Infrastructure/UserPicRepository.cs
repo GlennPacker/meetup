@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using log4net;
 using MeetUp.Core;
 using MeetUp.Domain;
 
@@ -8,6 +9,8 @@ namespace MeetUp.Infrastructure
 	public class UserPicRepository : IUserPicRepository
 	{
 		private readonly MeetUpContext _db;
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
 
 		public UserPicRepository(MeetUpContext db)
 		{
@@ -54,7 +57,7 @@ namespace MeetUp.Infrastructure
 			}
 			catch(Exception ex)
 			{
-				// logger needs adding here
+                Log.Error("Database Error Entity UserPic", ex);
 				return false;
 			}
 		}

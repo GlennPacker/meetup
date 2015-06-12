@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
+using log4net;
 using MeetUp.Core;
 using MeetUp.Domain;
 
@@ -9,6 +10,7 @@ namespace MeetUp.Infrastructure
 	public class VenueRepository : IVenueRepository
 	{
 		private readonly MeetUpContext _db;
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 		public VenueRepository(MeetUpContext db)
 		{
@@ -62,7 +64,7 @@ namespace MeetUp.Infrastructure
 			}
 			catch(Exception ex)
 			{
-				// logger needs adding here
+                Log.Error("Database Error Entity Venue", ex);
 				return false;
 			}
 		}

@@ -18,15 +18,15 @@ namespace MeetUp.MeetUpApi
         public Wrapper<MeetupEvents> GetMeetupEvents()
         {
             var url = BaseUrl + "2/events?&sign=true&photo-host=public&group_urlname=" + GroupUrl +
-          "&fields = event_hosts & page = 20 & omit = fee, maybe_rsvp_count, visibility, utc_offset, announced, " +
-          "waitlist_count, yes_rsvp_count, how_to_find_us, event_url, created, group, headcount, status";
-            // add in the rest of the url
-            var result = Get<MeetupEvents>(url);
-
+          "&fields=event_hosts&page=40&omit=fee,maybe_rsvp_count,visibility,utc_offset,announced," +
+          "waitlist_count,yes_rsvp_count,how_to_find_us,event_url,created,group,headcount,status";
+           
             try
             {
+                var result = Get<MeetupEvents>(url);
                 return result;
             }
+
             catch (Exception ex)
             {
               Log.Error("Unable to get event data from meetup", ex);

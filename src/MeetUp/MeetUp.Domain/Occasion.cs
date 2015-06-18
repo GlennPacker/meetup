@@ -7,12 +7,20 @@ namespace MeetUp.Domain
 {
     public class Occasion
     {
+        public Occasion()
+        {
+            Comments = new List<OccasionComment>();
+            RSVP = new List<RSVP>();
+            Created = DateTime.Now;
+        }
+
         [Key]
         public int Id { get; set; }
-
         public string Title { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        [Display(Name = "Event Date")]
+        [Required(ErrorMessage = "Date is required")]
         public DateTime Date { get; set; }
 
         [Display(Name = "About the night out / event")]
@@ -22,23 +30,19 @@ namespace MeetUp.Domain
         [Display(Name = "Date Added")]
         public DateTime Created { get; set; }
 
-        public int? MeetupEventId { get; set; }
+        [Index]
+        public long? MeetupEventId { get; set; }
         public DateTime? MeetupLastUpdated { get; set; }
 
         [UIHint("HourDropDown")]
         [Display(Name = "Time")]
         [Required(ErrorMessage = "Hour is required")]
-        public Int32 EventHour { get; set; }
+        public Int32 Hour { get; set; }
 
         [UIHint("MinuteDropDown")]
         [Required(ErrorMessage = "Minute is required")]
         [Display(Name = ":")]
-        public Int32 EventMin { get; set; }
-
-        [Display(Name = "Event Date")]
-        [Required(ErrorMessage = "Date is required")]
-        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
-        public DateTime EventDate { get; set; }
+        public Int32 Min { get; set; }
         
         public int HostId { get; set; }
         [ForeignKey("HostId")]
@@ -50,7 +54,16 @@ namespace MeetUp.Domain
 	    
         public bool IsDeleted{get;set;}
 
-        public virtual ICollection<OcassionComment> Comments { get; set; }
-        public virtual ICollection<RSVP> RSVP { get; set; }
+        public virtual List<OccasionComment> Comments { get; set; }
+        public virtual List<RSVP> RSVP { get; set; }
+
+        // while it is easier to deal with data entry as sperated date it does not always so
+        public DateTime? OccasionDateTime
+        {
+            get
+            {
+                return new DateTime(Date.Year, Date.Month, Date.Day, Hour, Min, 0);
+            }
+        }
     }
 }

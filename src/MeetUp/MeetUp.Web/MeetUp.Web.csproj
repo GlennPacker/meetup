@@ -52,6 +52,22 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Glimpse.Ado">
+      <HintPath>..\packages\Glimpse.Ado.1.7.3\lib\net45\Glimpse.Ado.dll</HintPath>
+    </Reference>
+    <Reference Include="Glimpse.AspNet, Version=1.9.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Glimpse.AspNet.1.9.2\lib\net45\Glimpse.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Glimpse.Core">
+      <HintPath>..\packages\Glimpse.1.8.6\lib\net45\Glimpse.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Glimpse.EF6">
+      <HintPath>..\packages\Glimpse.EF6.1.6.5\lib\net45\Glimpse.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="Glimpse.Mvc4">
+      <HintPath>..\packages\Glimpse.Mvc4.1.5.3\lib\net40\Glimpse.Mvc4.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
@@ -211,6 +227,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
+    <Compile Include="App_Start\AutoMapperConfiguration.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -219,19 +236,23 @@
     <Compile Include="App_Start\UnityWebApiActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AngularEventsController.cs" />
+    <Compile Include="Controllers\ApiEventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="ConfigServices.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
+    <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\RazorHelpers.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\Images\load.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -292,11 +313,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Js\App\AppMain.js" />
+    <Content Include="Js\Controllers\eventscontroller.js" />
     <Content Include="log4net.xml" />
     <Content Include="Scripts\angular-google-maps-street-view.js" />
     <Content Include="Scripts\angular-google-maps-street-view.min.js" />
     <Content Include="Scripts\angular-google-maps.js" />
     <Content Include="Scripts\angular-google-maps.min.js" />
+    <Content Include="Scripts\angular-route.js" />
+    <Content Include="Scripts\angular-route.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
@@ -317,6 +342,7 @@
       <DependentUpon>Demo.config</DependentUpon>
     </None>
     <Content Include="Log4Net.config" />
+    <Content Include="Scripts\angular-route.min.js.map" />
     <None Include="Scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -379,9 +405,13 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Shared\_LayoutHeader.cshtml" />
+    <Content Include="Views\Shared\_LayoutSidebar.cshtml" />
+    <Content Include="Views\AngularEvents\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Js\Directive\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -391,9 +421,25 @@
       <Project>{F4C93019-2AC3-4376-AA89-33360F66C46C}</Project>
       <Name>MeetUp.ApiProxy</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MeetUp.Core\MeetUp.Core.csproj">
+      <Project>{79960A39-F156-4AD6-BB64-DEAE4AE936D2}</Project>
+      <Name>MeetUp.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MeetUp.Domain\MeetUp.Domain.csproj">
+      <Project>{DD06E675-69C1-403B-A56B-698D49F0F06D}</Project>
+      <Name>MeetUp.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MeetUp.Infrastructure\MeetUp.Infrastructure.csproj">
+      <Project>{5F01F355-2DFC-45D2-A238-682B51F0959B}</Project>
+      <Name>MeetUp.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MeetUp.MeetUpApi\MeetUp.MeetUpApi.csproj">
       <Project>{BCA1A825-A651-461C-87FF-79CA09C425A9}</Project>
       <Name>MeetUp.MeetUpApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MeetUp.Services\MeetUp.Services.csproj">
+      <Project>{A17380A7-7011-4DCB-9FA2-8656E90C8F6B}</Project>
+      <Name>MeetUp.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

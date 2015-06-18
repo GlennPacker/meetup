@@ -62,5 +62,12 @@ namespace MeetUp.Infrastructure
 			}
 		}
 
+
+        public void Dispose()
+        {
+            _db.Dispose();
+        }
+
+
 	}
 }

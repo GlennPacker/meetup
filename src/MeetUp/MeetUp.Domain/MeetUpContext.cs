@@ -21,14 +21,14 @@ namespace MeetUp.Domain
         //public DbSet<Dinner> Dinners { get; set; }
 		public DbSet<Email> Emails { get; set; }
         public DbSet<Occasion> Occasions { get; set; }
-        public DbSet<OcassionComment> OcassionComments { get; set; }
+        public DbSet<OccasionComment> OcassionComments { get; set; }
         public DbSet<OccasionImage> OccasionImages { get; set; }
         public DbSet<RSVP> RSVPs { get; set; }
         public DbSet<Runner> Runners { get; set; }
 		public DbSet<UserAccount> UserAccounts { get; set; }
 		public DbSet<UserPic> UserPics { get; set; }
 		public DbSet<Venue> Venues { get; set; }
-
+        
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();

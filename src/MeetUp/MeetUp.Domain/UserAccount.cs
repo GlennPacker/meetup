@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MeetUp.Domain
 {
@@ -7,13 +8,12 @@ namespace MeetUp.Domain
     {
         [Key]
         public int Id { get; set; }
-        public double MeetupMemberId { get; set; }
-
-        public string Name { get; set; }
+        [Index]
+        public long MeetupMemberId { get; set; }
 
         [Display(Name = "Screen / Display Name")]
-        public string ScreenName { get; set; }
-
+        public string Name { get; set; }
+        
         [Display(Name = "About Me")]
         [DataType(DataType.MultilineText)]
         public string Bio { get; set; }
@@ -25,12 +25,12 @@ namespace MeetUp.Domain
         public string Tel { get; set; }
         public int? AuthUserId { get; set; }
         public bool IsAdmin { get; set; }
-
-        public string Photo { get; set; }
-        public string PhotoThb { get; set; }
+        
+        public string ProfileThmb { get; set; }
+        public string ProfilePic { get; set; }
 
         public virtual ICollection<RSVP> RSVP { get; set; }
-        public virtual ICollection<OcassionComment> Comments { get; set; }
+        public virtual ICollection<OccasionComment> Comments { get; set; }
         public virtual ICollection<Email> Emails { get; set; }
         public virtual ICollection<UserPic> Pics { get; set; }
         public virtual ICollection<OccasionImage> EventImages { get; set; }

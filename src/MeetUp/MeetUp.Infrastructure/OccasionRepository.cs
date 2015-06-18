@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using log4net;
@@ -25,7 +26,13 @@ namespace MeetUp.Infrastructure
 			return includeDeleted ? data : data.Where(r => !r.IsDeleted);
 		}
 
-		public Occasion Find(int id)
+	    public IQueryable<Occasion> List(List<long> meetupEventIds)
+	    {
+            var data = List().Include(h => h.Host).Include(v => v.Venue).Where(r => meetupEventIds.Contains(r.MeetupEventId ?? 0));
+	        return data;
+	    }
+
+	    public Occasion Find(int id)
 		{
 			var data = _db.Occasions.Find(id);
 			return data;
@@ -76,5 +83,9 @@ namespace MeetUp.Infrastructure
 			}
 		}
 
+	    public void Dispose()
+	    {
+	        _db.Dispose();
+	    }
 	}
 }

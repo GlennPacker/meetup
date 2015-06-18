@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using log4net;
@@ -18,15 +19,27 @@ namespace MeetUp.Infrastructure
 		}
 
 
-		public UserAccount Find(int id)
+	    public IQueryable<UserAccount> List()
+	    {
+	        var data = _db.UserAccounts;
+	        return data;
+	    }
+
+	    public IQueryable<UserAccount> List(List<long> meetupMemberIds)
+	    {
+	        var data = List().Where(r => meetupMemberIds.Contains(r.MeetupMemberId));
+	        return data;
+	    }
+
+	    public UserAccount Find(int id)
 		{
 			var data = _db.UserAccounts.Find(id);
 			return data;
 		}
 
-		public UserAccount FindByMeetUp(double meetUpEventId)
-		{
-			var data = _db.UserAccounts.FirstOrDefault(r => r.MeetupMemberId == meetUpEventId);
+	    public UserAccount FindByMeetUpId(long meetUpId)
+	    {
+            var data = _db.UserAccounts.FirstOrDefault(r => r.MeetupMemberId == meetUpId);
 			return data;
 		}
 
@@ -68,6 +81,12 @@ namespace MeetUp.Infrastructure
 				return false;
 			}
 		}
+
+
+        public void Dispose()
+        {
+            _db.Dispose();
+        }
 
 	}
 }

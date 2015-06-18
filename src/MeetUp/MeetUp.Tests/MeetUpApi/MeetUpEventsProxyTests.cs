@@ -2,7 +2,7 @@
 using MeetUp.MeetUpApi;
 using NUnit.Framework;
 
-namespace MeetUp.Tests
+namespace MeetUp.Tests.MeetUpApi
 {
     [TestFixture]
     public class MeetUpEventsProxyTests

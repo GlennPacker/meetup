@@ -36,6 +36,21 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Glimpse.Ado">
+      <HintPath>..\packages\Glimpse.Ado.1.7.3\lib\net45\Glimpse.Ado.dll</HintPath>
+    </Reference>
+    <Reference Include="Glimpse.AspNet">
+      <HintPath>..\packages\Glimpse.AspNet.1.9.2\lib\net45\Glimpse.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Glimpse.Core">
+      <HintPath>..\packages\Glimpse.1.8.6\lib\net45\Glimpse.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Glimpse.EF6">
+      <HintPath>..\packages\Glimpse.EF6.1.6.5\lib\net45\Glimpse.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="Glimpse.Mvc4">
+      <HintPath>..\packages\Glimpse.Mvc4.1.5.3\lib\net40\Glimpse.Mvc4.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -48,14 +63,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Email.cs" />
+    <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="MeetUpContext.cs" />
-    <Compile Include="Migrations\201506041902192_1.cs" />
-    <Compile Include="Migrations\201506041902192_1.Designer.cs">
-      <DependentUpon>201506041902192_1.cs</DependentUpon>
+    <Compile Include="Migrations\201506151922340_1.cs" />
+    <Compile Include="Migrations\201506151922340_1.Designer.cs">
+      <DependentUpon>201506151922340_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506181744220_2.cs" />
+    <Compile Include="Migrations\201506181744220_2.Designer.cs">
+      <DependentUpon>201506181744220_2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OccasionImage.cs" />
-    <Compile Include="OcassionComment.cs" />
+    <Compile Include="OccasionComment.cs" />
     <Compile Include="Occasion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RSVP.cs" />
@@ -69,8 +89,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201506041902192_1.resx">
-      <DependentUpon>201506041902192_1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201506151922340_1.resx">
+      <DependentUpon>201506151922340_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506181744220_2.resx">
+      <DependentUpon>201506181744220_2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

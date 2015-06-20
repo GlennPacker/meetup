@@ -15,36 +15,45 @@ namespace MeetUp.Infrastructure
 		{
 			_db = db;
 		}
+        
+	    public bool Update(ApiType apiType, int? id)
+	    {
+	        var data = Find(apiType, id);           
+            data.LastRun = DateTime.Now;
+	        return Save();
+	    }
 
+	    public DateTime? GetLastRun(ApiType apiType, int? id)
+	    {
+            var data = Find(apiType, id);
+            if (data == null) {return null;}
+            // concurrency check with failure
+	        return data.Started > DateTime.Now.AddMinutes(-2) ? DateTime.Now : data.LastRun;
+	    }
 
-		public IQueryable<Runner> List()
-		{
-			var data = _db.Runners;
-			return data;
-		}
+	    public void StartUpdate(ApiType apiType, int? refId)
+	    {
+	        var data = Find(apiType, refId);
+	        if (data == null)
+	        {
+	            Add(new Runner {ApiType = apiType, LastRun = DateTime.Now, RefId = refId, Started = DateTime.Now});
+	        }
+	        else
+	        {
+	            data.Started = DateTime.Now;
+	        }
+	        Save();
+	    }
 
-		public Runner Find(int id)
-		{
-			var data = _db.Runners.Find(id);
-			return data;
-		}
+	    public Runner Find(ApiType apiType, int? id)
+        {
+            var data = _db.Runners.Where(r => r.ApiType == apiType);
+            return id == null? data.FirstOrDefault(): data.FirstOrDefault(r => r.RefId == id);
+        }
 
 		public bool Add(Runner item)
 		{
 			_db.Runners.Add(item);
-			return Save();
-		}
-		
-		public bool Delete(int id)
-		{
-			var data = Find(id);
-			if (data == null) return true; // if it can't be found then it is not there and therefore we could argue and say it already has a state of deleted so just return true;
-			return Delete(data);
-		}
-
-		public bool Delete(Runner item)
-		{
-			_db.Runners.Remove(item);	// can't see a reason to keep to physical
 			return Save();
 		}
 
@@ -61,6 +70,13 @@ namespace MeetUp.Infrastructure
 				return false;
 			}
 		}
+
+
+        public void Dispose()
+        {
+            _db.Dispose();
+        }
+
 
 	}
 }

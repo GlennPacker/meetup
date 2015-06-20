@@ -2,7 +2,7 @@
 
 namespace MeetUp.MeetUpApi.Models
 {
-    public class Result
+    public class MeetUpEvent
     {
         public Int64 Id { get; set; }
         public long Time { get; set; }

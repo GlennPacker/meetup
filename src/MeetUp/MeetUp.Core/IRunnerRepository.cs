@@ -1,15 +1,17 @@
-using System.Linq;
+using System;
 using MeetUp.Domain;
 
 namespace MeetUp.Core
 {
 	public interface IRunnerRepository
 	{
-		IQueryable<Runner> List();
-		Runner Find(int id);
-		bool Add(Runner item);
-		bool Delete(int id);
-		bool Delete(Runner item);
-		bool Save();
+		bool Update(ApiType apiType, int? id);
+	    DateTime? GetLastRun(ApiType apiType, int? id);
+        void StartUpdate(ApiType meetUpEvents, int? refId);
+
+        // basic repo tasks
+        void Dispose();
+
+	    
 	}
 }

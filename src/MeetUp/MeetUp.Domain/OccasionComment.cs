@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MeetUp.Domain
 {
-    public class OcassionComment
+    public class OccasionComment
     {
         [Key]       
         public int Id { get; set; }

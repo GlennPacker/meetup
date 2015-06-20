@@ -1,7 +1,12 @@
 using System;
 using MeetUp.ApiProxy;
+using MeetUp.Core;
+using MeetUp.Infrastructure;
 using MeetUp.MeetUpApi;
 using MeetUp.MeetUpApi.Interfaces;
+using MeetUp.Services;
+using MeetUp.Services.Factories;
+using MeetUp.Services.Interfaces;
 using Microsoft.Practices.Unity;
 
 namespace MeetUp.Web
@@ -39,6 +44,23 @@ namespace MeetUp.Web
 
             container.RegisterType<IApiServices, ApiServices>();
             container.RegisterType<IMeetUpEventsProxy, MeetUpEventsProxy>(new InjectionConstructor(new ApiServices(), ConfigServices.MeetUpKey,ConfigServices.GroupUrl));
+            container.RegisterType<IMeetUpMemberProxy, MeetUpMemberProxy>(new InjectionConstructor(new ApiServices(), ConfigServices.MeetUpKey, ConfigServices.GroupUrl));
+
+            // Factories
+            container.RegisterType<IOccasionFactory, OccasionFactory>();
+            container.RegisterType<IUserAccountFactory, UserAccountFactory>();
+            container.RegisterType<IVenueFactory, VenueFactory>();
+
+            // Services
+            container.RegisterType<IMeetUpEventService, MeetUpEventService>();
+            container.RegisterType<IMeetUpMemberService, MeetUpMemberService>();
+            container.RegisterType<IServiceUtils, ServiceUtils>();
+
+            // Repos
+            container.RegisterType<IOccasionRepository, OccasionRepository>();
+            container.RegisterType<IVenueRepository, VenueRepository>();
+            container.RegisterType<IUserAccountRepository, UserAccountRepository>();
+            container.RegisterType<IRunnerRepository, RunnerRepository>();
         }
     }
 }

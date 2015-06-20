@@ -7,13 +7,15 @@ namespace MeetUp.Domain
     {
         [Key]
         public int Id { get; set; }
-        public bool IsDefault { get; set; }
-        public string MeetupImgPath { get; set; }
+        public string Path { get; set; }
         public string ContentType { get; set; }
-        public byte[] Img { get; set; }
-
+        
         public int UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual UserAccount User { get; set; }
+
+        public int VenueId { get; set; }
+        [ForeignKey("VenueId")]
+        public virtual Venue Venue{get;set;}
     }
 }

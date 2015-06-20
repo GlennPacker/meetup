@@ -30,7 +30,13 @@ namespace MeetUp.Infrastructure
 			return data;
 		}
 
-		public bool Add(Venue item)
+	    public Venue FindByMeetUpId(long id)
+	    {
+	        var data = _db.Venues.FirstOrDefault(r => r.MeetUpId == id);
+            return data;
+	    }
+
+	    public bool Add(Venue item)
 		{
 			_db.Venues.Add(item);
 			return Save();
@@ -68,6 +74,13 @@ namespace MeetUp.Infrastructure
 				return false;
 			}
 		}
+
+
+        public void Dispose()
+        {
+            _db.Dispose();
+        }
+
 
 	}
 }

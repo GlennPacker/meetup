@@ -10,5 +10,6 @@ namespace MeetUp.Core
 		bool Delete(int id);
 		bool Delete(UserPic item);
 		bool Save();
+        void Dispose();
 	}
 }

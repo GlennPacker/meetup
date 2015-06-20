@@ -11,5 +11,6 @@ namespace MeetUp.Core
 		bool Delete(int id);
 		bool Delete(RSVP item);
 		bool Save();
+        void Dispose();
 	}
 }

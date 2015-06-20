@@ -1,4 +1,11 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    Layout = null;
 }
-
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/angular-route.min.js"></script>
+<script src="~/Js/App/AppMain.js"></script>
+<script src="~/Js/Controllers/eventscontroller.js"></script>
+<script src="~/Js/Directive/eventdirective.js"></script>
+<div data-ng-app="appmain">
+    <div data-ng-view=""></div>
+</div>

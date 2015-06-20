@@ -2,9 +2,9 @@
 
 namespace MeetUp.MeetUpApi.Models
 {
-    public class MemberDowload
+    public class MeetUpMembers
     {
         public Meta meta { get; set; }
-        public List<MeetupMemberDownload> results { get; set; } 
+        public List<MeetupMember> results { get; set; } 
     }
 }

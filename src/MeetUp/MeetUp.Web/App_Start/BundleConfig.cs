@@ -24,7 +24,8 @@ namespace MeetUp.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/site.css",
-                "~/Content/bootstrap.css"
+                "~/Content/bootstrap.css",
+                "~/Content/bootstrap-theme.css"
                 ));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(

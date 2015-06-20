@@ -17,6 +17,7 @@ namespace MeetUp.ApiProxy
                 {
                     // attempt to download JSON data as a string
                     var jsonData = webClient.DownloadString(url);
+                    webClient.Encoding = Encoding.UTF8;
                     // if string with JSON data is not empty, deserialize it to class and return its instance JsonConvert.DeserializeObject<T>
                     wrapper.Data = !string.IsNullOrEmpty(jsonData)
                         ? JsonConvert.DeserializeObject<T>(jsonData)

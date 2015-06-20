@@ -19,25 +19,25 @@ namespace MeetUp.Infrastructure
 		}
 
 
-		public IQueryable<OcassionComment> List(int? occasionId)
+		public IQueryable<OccasionComment> List(int? occasionId)
 		{
 			var data = _db.OcassionComments;
 			return occasionId == null ? data : data.Where(r => r.OcassionId == occasionId);
 		}
 
-		public OcassionComment Find(int id)
+		public OccasionComment Find(int id)
 		{
 			var data = _db.OcassionComments.Find(id);
 			return data;
 		}
 
-		public bool Add(OcassionComment item)
+		public bool Add(OccasionComment item)
 		{
 			_db.OcassionComments.Add(item);
 			return Save();
 		}
 
-		public bool Update(OcassionComment item)
+		public bool Update(OccasionComment item)
 		{
 			_db.Entry(item).State = EntityState.Modified;
 			return Save();
@@ -50,7 +50,7 @@ namespace MeetUp.Infrastructure
 			return Delete(data);
 		}
 
-		public bool Delete(OcassionComment item)
+		public bool Delete(OccasionComment item)
 		{
 			_db.OcassionComments.Remove(item);	// i don't see any reason to keep comments so physical delete
 			return Save();
@@ -65,10 +65,17 @@ namespace MeetUp.Infrastructure
 			}
 			catch(Exception ex)
 			{
-                Log.Error("Database Error Entity OcassionComment", ex);
+                Log.Error("Database Error Entity OccasionComment", ex);
 				return false;
 			}
 		}
+
+
+        public void Dispose()
+        {
+            _db.Dispose();
+        }
+
 
 	}
 }

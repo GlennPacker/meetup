@@ -17,5 +17,10 @@ namespace MeetUp.Web.Controllers
             return View();
         }
 
+        public ActionResult UserProfile()
+        {
+            return View();
+        }
+
     }
 }

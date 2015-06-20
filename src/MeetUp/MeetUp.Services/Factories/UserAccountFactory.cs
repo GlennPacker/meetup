@@ -25,12 +25,10 @@ namespace MeetUp.Services.Factories
             var userIds = users.Select(r => r.MeetupMemberId);
 
             // update all members in one db call.
-            var update = members.Where(r => userIds.Contains(r.id)).Select(s => Update(s, users.FirstOrDefault(t => t.MeetupMemberId == s.id)));
+            var ignored = members.Where(r => userIds.Contains(r.id)).Select(s => Update(s, users.FirstOrDefault(t => t.MeetupMemberId == s.id)));
             _userAccountRepository.Save();
-
-
-            var create = members.Where(r => !users.Select(u => u.MeetupMemberId).Contains(r.id)).Select(Create);
-
+            
+            ignored = members.Where(r => !users.Select(u => u.MeetupMemberId).Contains(r.id)).Select(Create);
             var result = members.Select(r => MapUser(r, users)).ToList();
             return result;
         }

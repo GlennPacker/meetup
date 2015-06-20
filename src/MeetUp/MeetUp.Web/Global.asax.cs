@@ -20,6 +20,7 @@ namespace MeetUp.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
             AutoMapperConfiguration.Configure();
+            GlobalConfiguration.Configuration.EnsureInitialized(); 
         }
     }
 }

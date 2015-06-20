@@ -54,11 +54,13 @@ namespace MeetUp.Web
             // Services
             container.RegisterType<IMeetUpEventService, MeetUpEventService>();
             container.RegisterType<IMeetUpMemberService, MeetUpMemberService>();
+            container.RegisterType<IServiceUtils, ServiceUtils>();
 
             // Repos
             container.RegisterType<IOccasionRepository, OccasionRepository>();
             container.RegisterType<IVenueRepository, VenueRepository>();
             container.RegisterType<IUserAccountRepository, UserAccountRepository>();
+            container.RegisterType<IRunnerRepository, RunnerRepository>();
         }
     }
 }

@@ -74,6 +74,9 @@
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="MeetUpApi\MeetUpEventsProxyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\MeetUpEventServiceTests.cs" />
+    <Compile Include="Services\MeetUpMemberServiceTests.cs" />
+    <Compile Include="Services\ServiceUtilsTests.cs" />
     <Compile Include="TestModels.cs" />
     <Compile Include="TestModelsHiddenBase.cs" />
     <Compile Include="Web\AutoMapperTests.cs" />
@@ -87,6 +90,10 @@
       <Project>{F4C93019-2AC3-4376-AA89-33360F66C46C}</Project>
       <Name>MeetUp.ApiProxy</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MeetUp.Core\MeetUp.Core.csproj">
+      <Project>{79960A39-F156-4AD6-BB64-DEAE4AE936D2}</Project>
+      <Name>MeetUp.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MeetUp.Domain\MeetUp.Domain.csproj">
       <Project>{DD06E675-69C1-403B-A56B-698D49F0F06D}</Project>
       <Name>MeetUp.Domain</Name>
@@ -94,6 +101,10 @@
     <ProjectReference Include="..\MeetUp.MeetUpApi\MeetUp.MeetUpApi.csproj">
       <Project>{BCA1A825-A651-461C-87FF-79CA09C425A9}</Project>
       <Name>MeetUp.MeetUpApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MeetUp.Services\MeetUp.Services.csproj">
+      <Project>{A17380A7-7011-4DCB-9FA2-8656E90C8F6B}</Project>
+      <Name>MeetUp.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\MeetUp.Web\MeetUp.Web.csproj">
       <Project>{644F501F-F411-4187-A701-2CECE81D0542}</Project>

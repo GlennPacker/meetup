@@ -11,4 +11,12 @@
     </div>
 </div>
 
-events
+events{{events}}events
+
+<div data-ng-repeat="event in events">
+    {{event}}
+    <br/> <br/>
+    dir
+    <eventdirective occasion="event"></eventdirective>
+    <br/> <br/>
+</div>

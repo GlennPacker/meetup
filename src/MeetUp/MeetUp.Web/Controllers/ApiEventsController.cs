@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Mvc;
 using AutoMapper;
 using MeetUp.Core;
 using MeetUp.Domain;
@@ -23,15 +22,21 @@ namespace MeetUp.Web.Controllers
             _memberService = memberService;
         }
 
+
+        // initial call to events which will only get local data
+        [Route("api/v1/ApiEvents")]
         public HttpResponseMessage GetEvents()
         {
             return Request.CreateResponse(HttpStatusCode.OK, EventsFromDb());
         }
 
-        
-        public HttpResponseMessage GetEventsWithApiUpdate()
+        // second call which will update the data and then return the events. 
+        // This process can make the data seem most up to date if we see changes happen on screen. 
+        // this also means if meetup goes down user is still ok and we get a faster site.
+        [Route("api/v1/Events/Update")]
+        public HttpResponseMessage GetEventsWithApiUpdate(bool force = false)
         {
-            _meetUpEventsService.GetEventsFromMeetUp();
+            _meetUpEventsService.GetEventsFromMeetUp(force);
             return Request.CreateResponse(HttpStatusCode.OK, EventsFromDb());
         }
 

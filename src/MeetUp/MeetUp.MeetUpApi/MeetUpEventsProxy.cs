@@ -40,34 +40,5 @@ namespace MeetUp.MeetUpApi
                 };
             }
         }
-
-
-        //public Wrapper<ApiFoo> PostApiObject(ApiFoo item)
-        //{
-        //    var results = new List<ValidationResult>();
-        //    var isValid = Validator.TryValidateObject(item, new ValidationContext(item), results);
-        //    if (!isValid)
-        //    {
-        //        string error = null;
-        //        foreach (var modelError in results) error += modelError.ErrorMessage;
-
-        //        var apiErrorResult = new Wrapper<ApiFoo> { Data = item, Error = error, IsGood = false };
-        //        return apiErrorResult;
-        //    }
-
-        //    var url = _baseUrl + "controller";
-        //    var postData = JsonConvert.SerializeObject(item);
-        //    var result = _services.Post<ApiFoo>(url, postData);
-        //    return result;
-        //}
-
-        //public Wrapper<string> DeleteApiObject(int id)
-        //{
-        //    var url = _baseUrl + "controller/" + id;
-        //    return _services.Delete(url);
-        //}
-
-
-
     }
 }

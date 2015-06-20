@@ -33,6 +33,9 @@ namespace MeetUp.Services.Factories
 
             var result = meetupEvents.Where(r => !occasionIds.Contains(r.Id)).Select(CreateOccasion).ToList();    // create new events
             result.AddRange(meetupEvents.Where(r => occasionIds.Contains(r.Id)).Select(s => UpdateOccasion(s, occasions.FirstOrDefault(o => o.MeetupEventId == s.Id))).ToList()); // update events
+
+            // if we have updated anything save the changes. done here to stop repeated db hit.
+            _occasionRepository.Save();
             return result;
         }
 
@@ -41,7 +44,7 @@ namespace MeetUp.Services.Factories
             var eventDateTime = meetupEvent.Time.FromUnixTime();
             if (occasion.IsDeleted) return null; // if it deleted no point updating it
 
-            if (eventDateTime == occasion.OccasionDateTime && occasion.Title == meetupEvent.Title &&
+            if (eventDateTime == occasion.OccasionDateTime && occasion.Title == meetupEvent.Name &&
                 occasion.Description == meetupEvent.Description && meetupEvent.Venue.Name == occasion.Venue.Name &&
                 meetupEvent.event_hosts.First().member_id == occasion.Host.MeetupMemberId) return occasion;
 
@@ -50,12 +53,13 @@ namespace MeetUp.Services.Factories
             if (host == null)
             {
                 // get members
-                _memberService.GetMembersFromMeetUp();
+                _memberService.GetMembersFromMeetUp(true);  // force update we know there are new ones
                 host = _userAccountRepository.FindByMeetUpId(meetupEvent.event_hosts.First().member_id);
+                
+                if(host == null) return null;   // if we still don't have the host don't update the event.
             }
-            if(host == null) return null;   // if we still don't have the host don't update the event.
-
-            occasion.Title = meetupEvent.Title;
+            
+            occasion.Title = meetupEvent.Name;
             occasion.Date = eventDateTime.Date;
             occasion.Description = meetupEvent.Description;
             occasion.MeetupLastUpdated = DateTime.Now;
@@ -82,7 +86,7 @@ namespace MeetUp.Services.Factories
             var eventDateTime = meetupEvent.Time.FromUnixTime();
             var result = new Occasion
             {
-                Title = meetupEvent.Title,
+                Title = meetupEvent.Name,
                 Date = eventDateTime.Date,
                 Description = meetupEvent.Description,
                 Created = DateTime.Now,

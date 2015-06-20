@@ -8,7 +8,7 @@
         <div class="col-md-3">{{occasion.OccasionDateTime | date : 'EEE d MMM yyyy'}} </div>
     </div>
     <div class="col-md-12">
-        <p >{{occasion.Description}}</p>
+        <p data-ng-bind-html="occasion.Description" ></p>
         <div class="btn btn-default" data-ng-click="Details(item)">Details</div>
                         
         <collapsible title="Out On the Event">

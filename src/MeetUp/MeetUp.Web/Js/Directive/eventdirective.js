@@ -1,5 +1,5 @@
-﻿var myApp = angular.module('eventdirective', []);
-myApp.directive('eventdirective', function ($compile) {
+﻿var myApp = angular.module('eventdirective', ['ngSanitize']);
+myApp.directive('eventdirective', ['$compile', function ($compile) {
     return {
         restrict: 'E',    // 'E' element 'A' attribute 'C' class 'M' html comment
         replace: true,
@@ -8,7 +8,7 @@ myApp.directive('eventdirective', function ($compile) {
             occasion: "=occasion"  // '=' passes in model '&' passes in function '@' string
         },
         link: function(scope, element, attrs, controllers) {
-            
+
         }
     };
-});
+}]);

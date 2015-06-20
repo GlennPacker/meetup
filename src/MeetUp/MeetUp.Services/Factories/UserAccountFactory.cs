@@ -66,8 +66,8 @@ namespace MeetUp.Services.Factories
             };
             if (member.Photo != null)
             {
-                user.ProfilePic = member.Photo.thumb_link;
-                user.ProfileThmb = member.Photo.photo_link;
+                user.ProfilePic = member.Photo.photo_link;
+                user.ProfileThmb = member.Photo.thumb_link;
             }
 
             _userAccountRepository.Add(user);

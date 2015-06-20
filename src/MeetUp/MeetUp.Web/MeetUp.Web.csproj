@@ -318,6 +318,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Js\App\AppMain.js" />
     <Content Include="Js\Controllers\eventscontroller.js" />
+    <Content Include="Js\Directive\userprofiledirective.js" />
     <Content Include="Js\Directive\eventdirective.js" />
     <Content Include="log4net.xml" />
     <Content Include="Scripts\angular-google-maps-street-view.js" />
@@ -416,6 +417,7 @@
     <Content Include="Views\Shared\_LayoutSidebar.cshtml" />
     <Content Include="Views\AngularEvents\List.cshtml" />
     <Content Include="Views\AngularEvents\Event.cshtml" />
+    <Content Include="Views\AngularEvents\UserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -10,3 +10,7 @@
 .bannertext > form {
     float: right;
 }
+
+.bordered {
+    border: 2px solid #428bca !important;
+}

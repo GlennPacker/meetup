@@ -3,21 +3,28 @@
 }
 
 <div>
-    <div class="row">
-        <div class="col-md-9"><h2>{{occasion.Title}}</h2></div>
-        <div class="col-md-3">{{occasion.OccasionDateTime | date : 'EEE d MMM yyyy'}} </div>
-    </div>
-    <div class="col-md-12">
-        <p data-ng-bind-html="occasion.Description" ></p>
-        <div class="btn btn-default" data-ng-click="Details(item)">Details</div>
-                        
-        <collapsible title="Out On the Event">
-            <br/><br/>
-            <div class="row">
+    <div class="panel panel-primary">
+        <div class="panel-heading"> {{occasion.Title}} - {{occasion.OccasionDateTime | date : 'EEE d MMM yyyy'}}</div>
+        <div class="panel-body">
+            <div class="col-md-2 col-sm-4 hidden-xs">
+                <userprofiledirective user="occasion.Host"></userprofiledirective>
+            </div>
+            <div class="col-md-10 col-sm-8 col-xs-12" >
+                <span data-ng-bind-html="occasion.Description" ></span>
+                <br/>
+                <div class="text-center" >
+                    <div class="btn-group">
+                        <a class="btn btn-info">RSVPs</a>
+                        <a class="btn btn-primary">RSVP</a>
+                        <a class="btn btn-success">Map</a>
+                        <a class="btn btn-warning">somthing</a>
+                    </div>
+
+                </div>
                 <div data-ng-repeat="rsvp in item.RSVPs" class="col-md-2 hidden-sm">
-                    <user-profile user="rsvp.UserAccount"></user-profile>
+                    <userprofiledirective user="rsvp.UserAccount"></userprofiledirective>
                 </div>
             </div>
-        </collapsible>
-    </div>
+        </div>
+    </div>   
 </div>

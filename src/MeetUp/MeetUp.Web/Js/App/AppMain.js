@@ -1,4 +1,4 @@
-﻿var myApp = angular.module('appmain', ['ngRoute', 'eventscontroller', 'eventdirective']);
+﻿var myApp = angular.module('appmain', ['ngRoute', 'eventscontroller', 'eventdirective', 'userprofiledirective']);
 
 myApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.

@@ -46,7 +46,7 @@ namespace MeetUp.Domain
         
         public int HostId { get; set; }
         [ForeignKey("HostId")]
-        public UserAccount Host { get; set; }
+        public virtual UserAccount Host { get; set; }
 
         public int VenueId { get; set; }
         [ForeignKey("VenueId")]

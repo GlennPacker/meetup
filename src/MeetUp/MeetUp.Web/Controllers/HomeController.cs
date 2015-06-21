@@ -9,6 +9,7 @@ namespace MeetUp.Web.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.Menu = "Events";
             return View();
         }
 

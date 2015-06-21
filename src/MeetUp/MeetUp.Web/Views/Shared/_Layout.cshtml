@@ -9,20 +9,33 @@
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
+       @* @Scripts.Render("~/bundles/jquery")*@
     </head>
     <body>
-        @Html.Partial("_LayoutHeader")
+        @Html.Partial("_LayoutHeader", ViewBag.Menu == null? "": (string)ViewBag.Menu)
         
-        @Html.Partial("_LayoutSidebar", ViewBag.Menu == null? "": (string)ViewBag.Menu)
-
-        <div id="page-wrapper">
-            <div id="page-inner">
-                <div class="row">
-                    @RenderBody()
+        <div class="container">
+            <div class="col-md-10">
+                @RenderBody()
+            </div>
+            <div class="col-md-2">
+               
+                <div class="panel panel-primary">
+                <div class="panel-heading"><i class="fa fa-user"> </i> Latest Members </div>
+                <div class="panel-body">
+                        latest member profiles                    
                 </div>
+                </div>   
+
+                <div class="panel panel-primary">
+                <div class="panel-heading"><i class="fa fa-users"> </i>Latest RSVPs </div>
+                <div class="panel-body">
+                        latest rsvp member profiles                    
+                </div>
+                </div>                   
             </div>
         </div>
-        @Scripts.Render("~/bundles/jquery")
+        
         @RenderSection("scripts", required: false)
     </body>
 </html>

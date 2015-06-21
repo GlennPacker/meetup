@@ -4,20 +4,26 @@
 
 <div>
     <div class="panel panel-primary">
-        <div class="panel-heading"> {{occasion.Title}} - {{occasion.OccasionDateTime | date : 'EEE d MMM yyyy'}}</div>
+        <div class="panel-heading clearfix">
+            <div class="col-md-8"><i class="fa fa-calendar"> </i> {{occasion.Title}}</div>
+            <div class="col-md-4">{{occasion.OccasionDateTime | date : 'EEE d MMM yyyy'}}</div>
+            
+        </div>
         <div class="panel-body">
             <div class="col-md-2 col-sm-4 hidden-xs">
                 <userprofiledirective user="occasion.Host"></userprofiledirective>
             </div>
             <div class="col-md-10 col-sm-8 col-xs-12" >
+                Venue {{occasion.Venue}}
                 <span data-ng-bind-html="occasion.Description" ></span>
                 <br/>
                 <div class="text-center" >
                     <div class="btn-group">
                         <a class="btn btn-info">RSVPs</a>
-                        <a class="btn btn-primary">RSVP</a>
-                        <a class="btn btn-success">Map</a>
-                        <a class="btn btn-warning">somthing</a>
+                        @*<a class="btn btn-primary">RSVP</a>*@
+                        <a class="btn btn-primary">Map</a>
+                        <a class="btn btn-warning">Trip Advisor</a>
+                        <a class="btn btn-success">Photos</a>
                     </div>
 
                 </div>

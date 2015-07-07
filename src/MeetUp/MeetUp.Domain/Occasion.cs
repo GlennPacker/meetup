@@ -50,7 +50,7 @@ namespace MeetUp.Domain
 
         public int VenueId { get; set; }
         [ForeignKey("VenueId")]
-        public Venue Venue { get; set; }
+        public virtual Venue Venue { get; set; }
 	    
         public bool IsDeleted{get;set;}
 

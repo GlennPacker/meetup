@@ -20,7 +20,8 @@ namespace MeetUp.Tests.Services
         {
             _tm = new TestModels();
             // service inclueds utils class as the utils class was written after tests. Tests More complete if they test both classes although not good practice.
-            _service = new MeetUpEventService(_tm.MeetUpEventsProxyFake, _tm.OccasionRepositoryFake, _tm.OccasionFactoryFake, new ServiceUtils(_tm.RunnerRepositoryFake));  
+            _service = new MeetUpEventService(_tm.MeetUpEventsProxyFake, _tm.OccasionRepositoryFake, _tm.OccasionFactoryFake
+                , new ServiceUtils(_tm.RunnerRepositoryFake), _tm.MeetUpEventProxyFake, _tm.RsvpFactoryFake);  
             var events = new MeetupEvents{results = new MeetUpEvent[1], meta = new Meta()};
             _goodWrapper = new Wrapper<MeetupEvents> {Data = events, IsGood = true};
         }

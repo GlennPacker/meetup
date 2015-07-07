@@ -15,23 +15,23 @@ namespace MeetUp.Infrastructure
 		{
 			_db = db;
 		}
-        
-	    public bool Update(ApiType apiType, int? id)
+
+        public bool Update(ApiType apiType, long? refId)
 	    {
-	        var data = Find(apiType, id);           
+            var data = Find(apiType, refId);           
             data.LastRun = DateTime.Now;
 	        return Save();
 	    }
 
-	    public DateTime? GetLastRun(ApiType apiType, int? id)
+        public DateTime? GetLastRun(ApiType apiType, long? refId)
 	    {
-            var data = Find(apiType, id);
+            var data = Find(apiType, refId);
             if (data == null) {return null;}
             // concurrency check with failure
 	        return data.Started > DateTime.Now.AddMinutes(-2) ? DateTime.Now : data.LastRun;
 	    }
 
-	    public void StartUpdate(ApiType apiType, int? refId)
+	    public void StartUpdate(ApiType apiType, long? refId)
 	    {
 	        var data = Find(apiType, refId);
 	        if (data == null)
@@ -45,10 +45,10 @@ namespace MeetUp.Infrastructure
 	        Save();
 	    }
 
-	    public Runner Find(ApiType apiType, int? id)
+        public Runner Find(ApiType apiType, long? refId)
         {
             var data = _db.Runners.Where(r => r.ApiType == apiType);
-            return id == null? data.FirstOrDefault(): data.FirstOrDefault(r => r.RefId == id);
+            return refId == null ? data.FirstOrDefault() : data.FirstOrDefault(r => r.RefId == refId);
         }
 
 		public bool Add(Runner item)

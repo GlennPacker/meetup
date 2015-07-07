@@ -42,7 +42,9 @@ namespace MeetUp.Services.Factories
 
         public UserAccount Update(MeetupMember member, UserAccount user)
         {
-            if (member.bio == user.Bio && member.name == user.Name && user.ProfilePic == member.Photo.photo_link) return user; // no need to check thb as it will be updated same time as full photo  
+            if (member.bio == user.Bio && member.name == user.Name && (member.Photo != null && user.ProfilePic == member.Photo.photo_link)) return user; // no need to check thb as it will be updated same time as full photo  
+
+
             user.Bio = member.bio;
             user.Name = member.name;
             if (member.Photo != null)

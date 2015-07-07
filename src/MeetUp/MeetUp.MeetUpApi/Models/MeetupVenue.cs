@@ -6,7 +6,7 @@ namespace MeetUp.MeetUpApi.Models
         public decimal Lat { get; set; }
         public decimal Lon { get; set; }
         public string Name { get; set; }
-        public string Address1 { get; set; }
+        public string Address_1 { get; set; }
         public string City { get; set; }
     }
 }

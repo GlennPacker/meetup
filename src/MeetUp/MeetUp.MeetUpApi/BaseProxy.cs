@@ -20,7 +20,8 @@ namespace MeetUp.MeetUpApi
 
         public Wrapper<T> Get<T>(string url) where T : new()
         {
-            return _services.Get<T>(url + _key);
+            var data = _services.Get<T>(url + _key);
+            return data;
         }
 
         

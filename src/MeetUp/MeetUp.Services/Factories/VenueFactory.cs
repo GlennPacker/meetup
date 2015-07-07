@@ -22,10 +22,10 @@ namespace MeetUp.Services.Factories
 
         public Venue UpdateVenue(Venue venue, MeetupVenue meetupVenue)
         {
-            if (venue.Address1 == meetupVenue.Address1 && venue.City == meetupVenue.City && venue.IsDeleted == false &&
+            if (venue.Address1 == meetupVenue.Address_1 && venue.City == meetupVenue.City && venue.IsDeleted == false &&
                 venue.Name == meetupVenue.Name) return venue;
 
-            venue.Address1 = meetupVenue.Address1;
+            venue.Address1 = meetupVenue.Address_1;
             venue.City = meetupVenue.City;
             venue.IsDeleted = false;
             venue.Name = meetupVenue.Name;
@@ -37,7 +37,7 @@ namespace MeetUp.Services.Factories
         {
             var venue = new Venue
             {
-                Address1 = meetupVenue.Address1,
+                Address1 = meetupVenue.Address_1,
                 City = meetupVenue.City,
                 IsDeleted = false,
                 MeetUpId = meetupVenue.Id,

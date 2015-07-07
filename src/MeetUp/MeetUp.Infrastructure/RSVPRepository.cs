@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using log4net;
 using MeetUp.Core;
@@ -17,20 +18,37 @@ namespace MeetUp.Infrastructure
 			_db = db;
 		}
 
+	    public IQueryable<RSVP> List()
+	    {
+            var data = _db.RSVPs;
+	        return data;
+	    }
 
 		public IQueryable<RSVP> List(int? occasionId)
 		{
-			var data = _db.RSVPs;
+		    var data = List();
 			return occasionId == null ? data : data.Where(r => r.OccasionId == occasionId);
 		}
 
-		public RSVP Find(int id)
+	    public IQueryable<RSVP> ListByMeetupId(IEnumerable<long> meetupIds)
+	    {
+	        var data = List().Where(r => meetupIds.Contains(r.MeetUpId??0));
+	        return data;
+	    }
+
+	    public RSVP Find(int id)
 		{
 			var data = _db.RSVPs.Find(id);
 			return data;
 		}
 
-		public bool Add(RSVP item)
+	    public RSVP FindByMeetUpId(long id)
+	    {
+            var data = _db.RSVPs.FirstOrDefault(r => r.MeetUpId == id);
+            return data;
+	    }
+
+	    public bool Add(RSVP item)
 		{
 			_db.RSVPs.Add(item);
 			return Save();

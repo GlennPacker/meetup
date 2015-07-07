@@ -12,17 +12,19 @@ namespace MeetUp.ApiProxy
         {
             using (var webClient = new WebClient())
             {
+                webClient.Encoding = Encoding.UTF8;
                 var wrapper = new Wrapper<T> { Url = url };
                 try
                 {
                     // attempt to download JSON data as a string
                     var jsonData = webClient.DownloadString(url);
-                    webClient.Encoding = Encoding.UTF8;
+                    
                     // if string with JSON data is not empty, deserialize it to class and return its instance JsonConvert.DeserializeObject<T>
                     wrapper.Data = !string.IsNullOrEmpty(jsonData)
                         ? JsonConvert.DeserializeObject<T>(jsonData)
                         : new T();
                     wrapper.IsGood = true;
+                    wrapper.Url = url;
                     return wrapper;
                 }
                 catch (Exception ex)

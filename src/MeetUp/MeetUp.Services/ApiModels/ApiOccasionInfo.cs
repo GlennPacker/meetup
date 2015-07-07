@@ -1,7 +1,8 @@
 ﻿using System;
-using MeetUp.Services.ApiModels;
+using System.Collections.Generic;
+using MeetUp.MeetUpApi.Helpers;
 
-namespace MeetUp.Domain
+namespace MeetUp.Services.ApiModels
 {
     public class ApiOccasionInfo
     {
@@ -15,7 +16,32 @@ namespace MeetUp.Domain
         public int HostId { get; set; }
         public ApiUserAccount Host { get; set; }
         public int VenueId { get; set; }
-        public Venue Venue { get; set; }
-	    public DateTime OccasionDateTime { get; set; }
+        public DateTime OccasionDateTime { get; set; }
+        public List<ApiRSVP> Rsvp { get; set; }
+        public ApiVenue Venue { get; set; }
+        public DateTime? MeetupLastUpdated { get; set; }
+
+        public double JavascriptOccasionDateTime
+        {
+            get { return OccasionDateTime.ToJavascriptDateTime(); }
+        }
+
+        public double JavascriptLastUpdated
+        {
+            get
+            {
+                return MeetupLastUpdated == null? 0  : Convert.ToDateTime(MeetupLastUpdated).ToJavascriptDateTime();
+            }
+        }
+
+        public bool forceUpdate
+        {
+            get
+            {
+                var lastdayOrJustgone = OccasionDateTime.AddDays(1) > DateTime.Now && DateTime.Now > OccasionDateTime.AddDays(-1);
+                var hadRecentUpdate = MeetupLastUpdated != null && MeetupLastUpdated > DateTime.Now.AddMinutes(-5);
+                return lastdayOrJustgone && !hadRecentUpdate;
+            }
+        }
     }
 }

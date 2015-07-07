@@ -7,6 +7,7 @@ using System.Web.Http;
 using AutoMapper;
 using MeetUp.Core;
 using MeetUp.Domain;
+using MeetUp.Services.ApiModels;
 using MeetUp.Services.Interfaces;
 
 namespace MeetUp.Web.Controllers
@@ -37,13 +38,25 @@ namespace MeetUp.Web.Controllers
         public HttpResponseMessage GetEventsWithApiUpdate(bool force = false)
         {
             _meetUpEventsService.GetEventsFromMeetUp(force);
+            _meetUpEventsService.GetEventRsvpFromMeetUp();
             return Request.CreateResponse(HttpStatusCode.OK, EventsFromDb());
         }
 
+        [Route("api/v1/Event/Update")]
+        public HttpResponseMessage GetEventWithApiUpdate(int id)
+        {
+            _meetUpEventsService.GetEventRsvpFromMeetUp();
+            var data = _meetUpEventsService.Find(id);
+            var result = Mapper.Map<ApiOccasionInfo>(data);
+            return Request.CreateResponse(HttpStatusCode.OK, result);
+        }
+
+        
         public List<ApiOccasionInfo> EventsFromDb()
         {
             var fromDate = DateTime.Now.AddDays(-2);
-            var data = _meetUpEventsService.GetOccasions().Where(r => r.Date >= fromDate).ToList();  // its good to have a past event at the top for photos and to see event you just gone.
+            var data = _meetUpEventsService.GetOccasionsFromDate(fromDate).ToList();  // its good to have a past event at the top for photos and to see event you just gone.
+            
             return Mapper.Map<List<ApiOccasionInfo>>(data);
         }
 

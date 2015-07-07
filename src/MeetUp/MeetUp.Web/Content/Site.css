@@ -4,3 +4,7 @@
     border: 2px solid #428bca;
     border-bottom: none !important;
 }
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}

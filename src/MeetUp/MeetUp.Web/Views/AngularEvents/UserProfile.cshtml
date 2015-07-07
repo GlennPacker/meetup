@@ -2,11 +2,21 @@
     Layout = null;
 }
 
-<div class="bordered">
-    <div>
-        <img class="profileimg" data-ng-src="{{user.ProfilePic}}" width="100%" title="{{user.Bio}}"/>
+<div class="bordered" data-ng-show="!!width">
+    <div >
+        <img class="profileimg" src="/Content/Images/profile.png" data-ng-src="{{user.ProfilePic}}" style="max-width:{{width}}px;" width="100%" height="100px" title="{{user.Bio}}"/>
     </div>
-    <div class="text-center text-primary" style="background-color: #428bca; color: #ffffff">
-        {{user.Name}}
+    <div class="text-center text-primary" style="background-color: #428bca; color: #ffffff; max-width:{{width}}px;" >
+        {{user.Name}} <span ng-transclude></span>
+    </div>
+</div>
+
+<div class="bordered" data-ng-show="!width">
+    <div >
+        <img class="profileimg" src="/Content/Images/profile.png" data-ng-src="{{user.ProfilePic}}" width="100%" title="{{user.Bio}}"/>
+    </div>
+
+    <div class="text-center text-primary" style="background-color: #428bca; color: #ffffff" >
+        {{user.Name}} <span ng-transclude></span>
     </div>
 </div>

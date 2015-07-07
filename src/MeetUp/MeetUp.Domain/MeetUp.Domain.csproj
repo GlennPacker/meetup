@@ -82,6 +82,14 @@
     <Compile Include="Migrations\201506201500190_4.Designer.cs">
       <DependentUpon>201506201500190_4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506221833129_5.cs" />
+    <Compile Include="Migrations\201506221833129_5.Designer.cs">
+      <DependentUpon>201506221833129_5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506221936299_6.cs" />
+    <Compile Include="Migrations\201506221936299_6.Designer.cs">
+      <DependentUpon>201506221936299_6.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OccasionImage.cs" />
     <Compile Include="OccasionComment.cs" />
@@ -109,6 +117,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506201500190_4.resx">
       <DependentUpon>201506201500190_4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506221833129_5.resx">
+      <DependentUpon>201506221833129_5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506221936299_6.resx">
+      <DependentUpon>201506221936299_6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using log4net;
 using MeetUp.Core;
 using MeetUp.Domain;
 using MeetUp.MeetUpApi.Helpers;
@@ -15,6 +16,7 @@ namespace MeetUp.Services.Factories
         private readonly IVenueFactory _venueFactory;
         private readonly IUserAccountRepository _userAccountRepository;
         private readonly IMeetUpMemberService _memberService;
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public OccasionFactory(IOccasionRepository occasionRepository, IVenueFactory venueFactory, IUserAccountRepository userAccountRepository, IMeetUpMemberService memberService)
         {
@@ -48,7 +50,7 @@ namespace MeetUp.Services.Factories
                 occasion.Description == meetupEvent.Description && meetupEvent.Venue.Name == occasion.Venue.Name &&
                 meetupEvent.event_hosts.First().member_id == occasion.Host.MeetupMemberId) return occasion;
 
-            // we do not have enough data from api call to create a user so get the members
+            // we do not have enough data from api call to create a user so get the members if we don't have the host
             var host = _userAccountRepository.FindByMeetUpId(meetupEvent.event_hosts.First().member_id);
             if (host == null)
             {
@@ -56,15 +58,20 @@ namespace MeetUp.Services.Factories
                 _memberService.GetMembersFromMeetUp(true);  // force update we know there are new ones
                 host = _userAccountRepository.FindByMeetUpId(meetupEvent.event_hosts.First().member_id);
                 
-                if(host == null) return null;   // if we still don't have the host don't update the event.
+                if(host == null) {
+                    // this rrings alarm bells as the host can not be found anywhere and the event can not be scheduled
+                    Log.Error("unable to create event as host can not be found");
+                    return null;   // if we still don't have the host don't update the event.
+                }
             }
             
             occasion.Title = meetupEvent.Name;
             occasion.Date = eventDateTime.Date;
             occasion.Description = meetupEvent.Description;
-            occasion.MeetupLastUpdated = DateTime.Now;
+            //occasion.MeetupLastUpdated = DateTime.Now;  is just for rsvps and not the event itself. comment so it won't be misused in future
             occasion.Hour = eventDateTime.Hour;
             occasion.Min = eventDateTime.Minute;
+            occasion.Created = meetupEvent.created.FromUnixTime();
             if (occasion.Venue.MeetUpId != meetupEvent.Venue.Id)
                 occasion.VenueId = _venueFactory.MapVenue(meetupEvent.Venue).Id;
             occasion.HostId = host.Id;
@@ -77,7 +84,7 @@ namespace MeetUp.Services.Factories
             var host = _userAccountRepository.FindByMeetUpId(meetupEvent.event_hosts.First().member_id);
             if (host == null)
             {
-                // get members
+                // get members from meetup api
                 _memberService.GetMembersFromMeetUp();
                 host = _userAccountRepository.FindByMeetUpId(meetupEvent.event_hosts.First().member_id);
             }
@@ -91,7 +98,7 @@ namespace MeetUp.Services.Factories
                 Description = meetupEvent.Description,
                 Created = DateTime.Now,
                 MeetupEventId = meetupEvent.Id,
-                MeetupLastUpdated = DateTime.Now,
+                //MeetupLastUpdated = DateTime.Now,  is just for rsvps and not for the event its self. comment so it won't be misused in future
                 Hour = eventDateTime.Hour,
                 Min = eventDateTime.Minute,
                 IsDeleted = false,

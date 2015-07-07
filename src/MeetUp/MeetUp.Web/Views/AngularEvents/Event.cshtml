@@ -14,21 +14,76 @@
                 <userprofiledirective user="occasion.Host"></userprofiledirective>
             </div>
             <div class="col-md-10 col-sm-8 col-xs-12" >
-                Venue {{occasion.Venue}}
-                <span data-ng-bind-html="occasion.Description" ></span>
-                <br/>
-                <div class="text-center" >
-                    <div class="btn-group">
-                        <a class="btn btn-info">RSVPs</a>
-                        @*<a class="btn btn-primary">RSVP</a>*@
-                        <a class="btn btn-primary">Map</a>
-                        <a class="btn btn-warning">Trip Advisor</a>
-                        <a class="btn btn-success">Photos</a>
+                <div>
+                    Venue {{occasion.Venue.Name}}<br/>
+                    Address {{occasion.Venue.Address1}} {{occasion.Venue.Address2}}  {{occasion.Venue.City}} {{occasion.Venue.PostCode}}<br/>
+                    
+                    <span data-ng-bind-html="occasion.Description" ></span>
+                    <br/>
+                    <div class="text-center" >
+                        <div class="btn-group">
+                            <a class="btn btn-info" data-ng-click="rsvps()">RSVPs</a>
+                            <a class="btn btn-primary" data-ng-click="mappanel()">Map</a>
+                            <a class="btn btn-warning" data-ng-click="tripadvisor()">Trip Advisor</a>
+                            <a class="btn btn-success" data-ng-click="photos()">Photos</a>
+                        </div>
+                        <br/>
+                        <br/>
+                    </div>                       
+                </div>
+                
+                
+                
+            </div>
+            <div>
+                <div class="clearfix" data-ng-show="showrsvp">
+                    <div data-ng-repeat="Rsvp in occasion.Rsvp" class="col-md-3 col-xs-12 col-sm-4 col-lg-2" style="height: 150px;" >
+                        <userprofiledirective user="Rsvp.Going" width="200">{{Rsvp.Guests == 0? '': '+' + Rsvp.Guests}}</userprofiledirective>
+                        <br/>
+                    </div>
+                </div>
+                @*  todo:// improve map calls and only allow in dom once this is far too heavy *@
+                <div class="clearfix" data-ng-show="showmap">
+                    <div style="width: 900px; height: 350px;" class="visible-lg col-centered">
+                        <img alt="Street View" data-ng-src="//maps.googleapis.com/maps/api/streetview?size=450x300&amp;sensor=false&amp;location={{occasion.Venue.Address1}} {{occasion.Venue.Address2}}  {{occasion.Venue.City}} {{occasion.Venue.PostCode}}" class="pull-right" 
+                             src="//maps.googleapis.com/maps/api/streetview?size=450x300&amp;sensor=false&amp;location={{occasion.Venue.Address1}} {{occasion.Venue.Address2}}  {{occasion.Venue.City}} {{occasion.Venue.PostCode}}">
+                        <a target="_blank" href="//maps.google.co.uk/maps?hl=en&z=16&q={{occasion.Venue.Address1}} {{occasion.Venue.Address1}} {{occasion.Venue.Address2}}  {{occasion.Venue.City}} {{occasion.Venue.PostCode}}">
+                            <img class="pull-right" alt="Map View" data-ng-src="//maps.googleapis.com/maps/api/staticmap?center={{occasion.Venue.Name}} {{occasion.Venue.Address1}} {{occasion.Venue.Address2}}  {{occasion.Venue.City}} {{occasion.Venue.PostCode}}
+                                    &zoom=14&size=450x300&maptype=roadmap&sensor=false&markers={{occasion.Venue.Name}} {{occasion.Venue.Address1}} {{occasion.Venue.Address2}}  {{occasion.Venue.City}} {{occasion.Venue.PostCode}}" 
+                                 src="//maps.googleapis.com/maps/api/staticmap?center={{occasion.Venue.Name}} {{occasion.Venue.Address1}} {{occasion.Venue.Address2}}  {{occasion.Venue.City}} {{occasion.Venue.PostCode}}
+                                    &zoom=14&size=450x300&maptype=roadmap&sensor=false&markers={{occasion.Venue.Name}} {{occasion.Venue.Address1}} {{occasion.Venue.Address1}} {{occasion.Venue.Address2}}  {{occasion.Venue.City}} {{occasion.Venue.PostCode}}">
+                        </a>
+                    </div>
+                    
+                    <div style="width: 600px; height: 250px;" class="visible-md col-centered">
+                        <img alt="Street View" data-ng-src="//maps.googleapis.com/maps/api/streetview?size=300x200&amp;sensor=false&amp;location={{occasion.Venue.Address1}} {{occasion.Venue.Address2}}  {{occasion.Venue.City}} {{occasion.Venue.PostCode}}" class="pull-right" 
+                             src="//maps.googleapis.com/maps/api/streetview?size=300x200&amp;sensor=false&amp;location={{occasion.Venue.Address1}} {{occasion.Venue.Address2}}  {{occasion.Venue.City}} {{occasion.Venue.PostCode}}">
+                        <a target="_blank" href="//maps.google.co.uk/maps?hl=en&z=16&q={{occasion.Venue.Address1}} {{occasion.Venue.Address1}} {{occasion.Venue.Address2}}  {{occasion.Venue.City}} {{occasion.Venue.PostCode}}">
+                            <img class="pull-right" alt="Map View" data-ng-src="//maps.googleapis.com/maps/api/staticmap?center={{occasion.Venue.Name}} {{occasion.Venue.Address1}} {{occasion.Venue.Address2}}  {{occasion.Venue.City}} {{occasion.Venue.PostCode}}
+                                    &zoom=14&size=300x200&maptype=roadmap&sensor=false&markers={{occasion.Venue.Name}} {{occasion.Venue.Address1}} {{occasion.Venue.Address2}}  {{occasion.Venue.City}} {{occasion.Venue.PostCode}}" 
+                                 src="//maps.googleapis.com/maps/api/staticmap?center={{occasion.Venue.Name}} {{occasion.Venue.Address1}} {{occasion.Venue.Address2}}  {{occasion.Venue.City}} {{occasion.Venue.PostCode}}
+                                    &zoom=14&size=300x200&maptype=roadmap&sensor=false&markers={{occasion.Venue.Name}} {{occasion.Venue.Address1}} {{occasion.Venue.Address1}} {{occasion.Venue.Address2}}  {{occasion.Venue.City}} {{occasion.Venue.PostCode}}">
+                        </a>
+                    </div>
+                    
+                    
+                    <div style="width: 300px; height: 250px;" class="visible-sm col-centered">
+                        <a target="_blank" href="//maps.google.co.uk/maps?hl=en&z=16&q={{occasion.Venue.Address1}} {{occasion.Venue.Address1}} {{occasion.Venue.Address2}}  {{occasion.Venue.City}} {{occasion.Venue.PostCode}}">
+                            <img class="pull-right" alt="Map View" data-ng-src="//maps.googleapis.com/maps/api/staticmap?center={{occasion.Venue.Name}} {{occasion.Venue.Address1}} {{occasion.Venue.Address2}}  {{occasion.Venue.City}} {{occasion.Venue.PostCode}}
+                                    &zoom=14&size=300x200&maptype=roadmap&sensor=false&markers={{occasion.Venue.Name}} {{occasion.Venue.Address1}} {{occasion.Venue.Address2}}  {{occasion.Venue.City}} {{occasion.Venue.PostCode}}" 
+                                 src="//maps.googleapis.com/maps/api/staticmap?center={{occasion.Venue.Name}} {{occasion.Venue.Address1}} {{occasion.Venue.Address2}}  {{occasion.Venue.City}} {{occasion.Venue.PostCode}}
+                                    &zoom=14&size=300x200&maptype=roadmap&sensor=false&markers={{occasion.Venue.Name}} {{occasion.Venue.Address1}} {{occasion.Venue.Address1}} {{occasion.Venue.Address2}}  {{occasion.Venue.City}} {{occasion.Venue.PostCode}}">
+                        </a>
                     </div>
 
                 </div>
-                <div data-ng-repeat="rsvp in item.RSVPs" class="col-md-2 hidden-sm">
-                    <userprofiledirective user="rsvp.UserAccount"></userprofiledirective>
+                    
+                <div class="clearfix" data-ng-show="showtripadvisor">
+                    Trip advisor
+                </div>
+                    
+                <div class="clearfix" data-ng-show="showphotos">
+                    Photos
                 </div>
             </div>
         </div>

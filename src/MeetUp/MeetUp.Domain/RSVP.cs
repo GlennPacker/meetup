@@ -16,5 +16,7 @@ namespace MeetUp.Domain
         [ForeignKey("OccasionId")]
         public virtual Occasion Occasion { get; set; }
 
+        public long? MeetUpId { get; set; }
+        public int Guests { get; set; }
     }
 }

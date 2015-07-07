@@ -12,5 +12,11 @@ namespace MeetUp.MeetUpApi.Helpers
                 dt = dt.AddHours(1);
             return dt;
         }
+
+        public static double ToJavascriptDateTime(this DateTime date)
+        {
+            var result = (date - (new DateTime(1970, 1, 1))).TotalMilliseconds;
+            return result;
+        }
     }
 }

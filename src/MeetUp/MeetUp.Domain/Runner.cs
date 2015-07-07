@@ -11,7 +11,7 @@ namespace MeetUp.Domain
         [Index]
         public ApiType  ApiType { get; set; }
         [Index]
-        public int? RefId { get; set; }
+        public long? RefId { get; set; }
         public DateTime LastRun { get; set; }
         public DateTime Started { get; set; }
     }

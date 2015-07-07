@@ -61,6 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseProxy.cs" />
+    <Compile Include="Interfaces\IMeetUpEventProxy.cs" />
+    <Compile Include="MeetUpEventProxy.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Interfaces\IMeetUpMemberProxy.cs" />
     <Compile Include="MeetUpMemberProxy.cs" />
@@ -69,6 +71,8 @@
     <Compile Include="Models\MeetupEvents.cs" />
     <Compile Include="Models\MeetupMember.cs" />
     <Compile Include="Models\MeetupPhoto.cs" />
+    <Compile Include="Models\MeetUpRSVP.cs" />
+    <Compile Include="Models\MeetupRSVPObject.cs" />
     <Compile Include="Models\MeetupVenue.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\MeetUpMembers.cs" />

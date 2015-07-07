@@ -5,9 +5,9 @@ namespace MeetUp.Core
 {
 	public interface IRunnerRepository
 	{
-		bool Update(ApiType apiType, int? id);
-	    DateTime? GetLastRun(ApiType apiType, int? id);
-        void StartUpdate(ApiType meetUpEvents, int? refId);
+        bool Update(ApiType apiType, long? id);
+	    DateTime? GetLastRun(ApiType apiType, long? id);
+        void StartUpdate(ApiType meetUpEvents, long? refId);
 
         // basic repo tasks
         void Dispose();

@@ -14,6 +14,8 @@ namespace MeetUp.Tests
         public IMeetUpMemberProxy MeetUpMemberProxyFake { get; set; }
         public IUserAccountFactory UserAccountFactoryFake { get; set; }
         public IServiceUtils ServiceUtilsFake { get; set; }
+        public IMeetUpEventProxy MeetUpEventProxyFake { get; set; }
+        public IRsvpFactory RsvpFactoryFake { get; set; }
 
         public TestModels()
         {
@@ -24,6 +26,8 @@ namespace MeetUp.Tests
             MeetUpMemberProxyFake = A.Fake<IMeetUpMemberProxy>();
             UserAccountFactoryFake = A.Fake<IUserAccountFactory>();
             ServiceUtilsFake = A.Fake<IServiceUtils>();
+            MeetUpEventProxyFake = A.Fake<IMeetUpEventProxy>();
+            RsvpFactoryFake = A.Fake<IRsvpFactory>();
         }
     }
 }

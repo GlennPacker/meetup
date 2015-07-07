@@ -63,6 +63,8 @@
     <Compile Include="ApiModels\ApiUserAccount.cs" />
     <Compile Include="ApiModels\ApiVenue.cs" />
     <Compile Include="ApiModels\ApiUserPic.cs" />
+    <Compile Include="Interfaces\IRsvpFactory.cs" />
+    <Compile Include="Factories\RsvpFactory.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Interfaces\IUserAccountFactory.cs" />
     <Compile Include="Interfaces\IMeetUpMemberService.cs" />

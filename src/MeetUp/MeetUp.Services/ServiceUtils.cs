@@ -16,7 +16,7 @@ namespace MeetUp.Services
 
         #region Runner
 
-        public bool ShouldUpdate(bool force, DateTime updateIfOlderThan, ApiType apiType, int? refId)
+        public bool ShouldUpdate(bool force, DateTime updateIfOlderThan, ApiType apiType, long? refId)
         {
             if (force)
             {
@@ -25,9 +25,9 @@ namespace MeetUp.Services
             }
 
             // there is no point in updating the y every few seconds so lets see when last update was
-            var lastrun = _runnerRepository.GetLastRun(apiType, refId);
+            var lastrun = GetLastRun(apiType, refId);
             // if last update is in the last x hours don't get new y as it is unlikely there is new
-            if (lastrun != null && Convert.ToDateTime(lastrun) >= updateIfOlderThan)
+            if (lastrun == null || Convert.ToDateTime(lastrun) <= updateIfOlderThan)
             {
                 _runnerRepository.StartUpdate(apiType, refId);
                 return true;
@@ -35,7 +35,13 @@ namespace MeetUp.Services
             return false;
         }
 
-        public void UpdateLastRun(ApiType meetUpEvents, int? refId)
+        public DateTime? GetLastRun(ApiType apiType, long? refId)
+        {
+            var data = _runnerRepository.GetLastRun(apiType, refId);
+            return data;
+        }
+
+        public void UpdateLastRun(ApiType meetUpEvents, long? refId)
         {
             _runnerRepository.Update(ApiType.MeetUpEvents, null);
         }

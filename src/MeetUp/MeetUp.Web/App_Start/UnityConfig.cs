@@ -45,15 +45,18 @@ namespace MeetUp.Web
             container.RegisterType<IApiServices, ApiServices>();
             container.RegisterType<IMeetUpEventsProxy, MeetUpEventsProxy>(new InjectionConstructor(new ApiServices(), ConfigServices.MeetUpKey,ConfigServices.GroupUrl));
             container.RegisterType<IMeetUpMemberProxy, MeetUpMemberProxy>(new InjectionConstructor(new ApiServices(), ConfigServices.MeetUpKey, ConfigServices.GroupUrl));
+            container.RegisterType<IMeetUpEventProxy, MeetUpEventProxy>(new InjectionConstructor(new ApiServices(), ConfigServices.MeetUpKey, ConfigServices.GroupUrl));
 
             // Factories
             container.RegisterType<IOccasionFactory, OccasionFactory>();
             container.RegisterType<IUserAccountFactory, UserAccountFactory>();
             container.RegisterType<IVenueFactory, VenueFactory>();
+            container.RegisterType<IRsvpFactory, RsvpFactory>();
 
             // Services
             container.RegisterType<IMeetUpEventService, MeetUpEventService>();
             container.RegisterType<IMeetUpMemberService, MeetUpMemberService>();
+            
             container.RegisterType<IServiceUtils, ServiceUtils>();
 
             // Repos
@@ -61,6 +64,7 @@ namespace MeetUp.Web
             container.RegisterType<IVenueRepository, VenueRepository>();
             container.RegisterType<IUserAccountRepository, UserAccountRepository>();
             container.RegisterType<IRunnerRepository, RunnerRepository>();
+            container.RegisterType<IRSVPRepository, RSVPRepository>();
         }
     }
 }

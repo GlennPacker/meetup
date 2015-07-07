@@ -3,7 +3,12 @@ myApp.directive('userprofiledirective', ['$compile', function ($compile) {
     return {
         restrict: 'E',
         //replace: true,
+        transclude: true,
         templateUrl: '/AngularEvents/UserProfile',
-        scope: { user: "=user" }
+        scope: {
+            user: "=user",
+            height: "@?",
+            width: "@?"
+        }
     };
 }]);

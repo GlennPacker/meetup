@@ -8,7 +8,6 @@ namespace MeetUp.Core
     {
         void GetEventsFromMeetUp(bool force = false);
         void GetEventRsvpFromMeetUp();
-        IQueryable<Occasion> GetOccasionsByStartDate();
         IQueryable<Occasion> GetOccasionsFromDate(DateTime dateTime);
         void Dispose();
 

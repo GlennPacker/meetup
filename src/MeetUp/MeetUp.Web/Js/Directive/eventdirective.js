@@ -24,10 +24,9 @@ myApp.directive('eventdirective', [
                         scope.getevent();
                     }
                 }
-
-
+                
                 scope.getevent = function () {
-                    var url = '/api/v1/Event/Update?id=' + scope.occasion.Id + '&force=' + scope.occasion.forceUpdate; // update event forced if soon
+                    var url = '/api/v1/Event/Update?id=' + scope.occasion.Id + '&force=' + scope.occasion.forceUpdate; 
                     $http.get(url).success(function (data, status, headers, config) {
                         scope.occasion = data;
                         scope.updatedoccasion = true;

@@ -52,12 +52,22 @@ namespace MeetUp.Services
         {
             // routines purpose is to try to update events/occasions as often as possible without hitting meetup api limits
             var now = DateTime.Now;
-            var dt = now.AddDays(-1);
-            var data = GetOccasionsByStartDate().Where(r => r.Date > dt).ToList();
+            var dt = now.AddDays(-2);
+            var data = _occasionRepository.List().Where(r => r.Date > dt).ToList();
+
+            data = data.Where(r => r.Title == "Beach BBQ").ToList();
+            
             
             foreach (var occasion in data)
             {
                 if (occasion.MeetupEventId == null) continue;
+
+                if(occasion.Created > now.AddDays(-1))     // just been created so likely for heavy activity
+                {
+                    if(occasion.MeetupLastUpdated == null || occasion.MeetupLastUpdated < DateTime.Now.AddMinutes(-15))
+                        GetEventFromMeetup((long)occasion.MeetupEventId, occasion);
+                    continue;
+                }
 
                 if ((occasion.OccasionDateTime > now.AddDays(-1)  && occasion.OccasionDateTime < now.AddDays(1)))  // last day or day just gone everything changes so often just grab the data from api   
                 {
@@ -65,19 +75,14 @@ namespace MeetUp.Services
                         GetEventFromMeetup((long)occasion.MeetupEventId, occasion);
                     continue;
                 }
-                if(occasion.Created > now.AddDays(-1))     // just been created so likely for heavy activity
-                {
-                    if(occasion.MeetupLastUpdated < DateTime.Now.AddMinutes(-15))
-                        GetEventFromMeetup((long)occasion.MeetupEventId, occasion);
-                    continue;
-                }
-                if (occasion.OccasionDateTime > now.AddDays(-7)) // event/occasion this week
+                
+                if (occasion.OccasionDateTime < now.AddDays(7)) // event/occasion this week
                 {
                     if(occasion.MeetupLastUpdated < DateTime.Now.AddHours(-3))
                         GetEventFromMeetup((long)occasion.MeetupEventId, occasion);
                     continue;
                 }
-                if (occasion.OccasionDateTime < now.AddDays(-7) && occasion.MeetupLastUpdated < DateTime.Now.AddHours(-8)) // anything else 
+                if (occasion.OccasionDateTime > now.AddDays(-7) && occasion.MeetupLastUpdated < DateTime.Now.AddHours(-8)) // anything else 
                         GetEventFromMeetup((long) occasion.MeetupEventId, occasion); // anything after next week just update three times a day little changes this far ahead
             }
             _occasionRepository.Save();
@@ -107,16 +112,12 @@ namespace MeetUp.Services
 
         public IQueryable<Occasion> GetOccasionsFromDate(DateTime dateTime)
         {
-            var data = GetOccasionsByStartDate().Where(r => r.Date > dateTime);
+            var data = _occasionRepository.List().Where(r => r.Date > dateTime);
             return data;
         }
 
 
-        public IQueryable<Occasion> GetOccasionsByStartDate()
-        {
-            var data = _occasionRepository.List();
-            return data;
-        }
+        
 
         public Occasion Find(int id)
         {

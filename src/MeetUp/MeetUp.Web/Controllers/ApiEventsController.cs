@@ -33,7 +33,7 @@ namespace MeetUp.Web.Controllers
 
         // second call which will update the data and then return the events. 
         // This process can make the data seem most up to date if we see changes happen on screen. 
-        // this also means if meetup goes down user is still ok and we get a faster site.
+        // this also means if meetup goes down user is still ok, and we get a faster site trade off is more hits on server.
         [Route("api/v1/Events/Update")]
         public HttpResponseMessage GetEventsWithApiUpdate(bool force = false)
         {
@@ -50,12 +50,11 @@ namespace MeetUp.Web.Controllers
             var result = Mapper.Map<ApiOccasionInfo>(data);
             return Request.CreateResponse(HttpStatusCode.OK, result);
         }
-
         
         public List<ApiOccasionInfo> EventsFromDb()
         {
             var fromDate = DateTime.Now.AddDays(-2);
-            var data = _meetUpEventsService.GetOccasionsFromDate(fromDate).ToList();  // its good to have a past event at the top for photos and to see event you just gone.
+            var data = _meetUpEventsService.GetOccasionsFromDate(fromDate).OrderBy(d => d.Date).ToList();  // its good to have a past event at the top for photos, comments and to see event you just gone.
             
             return Mapper.Map<List<ApiOccasionInfo>>(data);
         }
